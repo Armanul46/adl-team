@@ -2,8 +2,8 @@
 Contributors: AazzTech
 Tags: team, meet the team, team showcase, team profile, teams, team slider
 Requires at least: 4.0
-Tested up to:  5.2
-Stable tag: 1.2.2
+Tested up to:  5.4
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,10 @@ This is how easy to use this plugin.
 2. Front view 2 (Theme - Colorful Grid)
 
 == Changelog ==
+= 1.2.4 =
+* Improved: WordPress version
+= 1.2.3 =
+* Fixed language issue
 = 1.2.2 =
 * Fixed require file issue
 = 1.1.1 =
