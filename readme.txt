@@ -11,7 +11,7 @@ It helps you display team members on your website very easily and you can also s
 
 == Description ==
 
-Live demo: <https://aazztech.com/demos/plugins/adl-team-demo-1>
+Live demo: <https://demo.aazztech.com/plugin/adl-team-demo-1/>
 
 Do you have a business that runs by a team of expert members? Do you run an agency? Do you run a medical clinic that run by expert doctors? No matter what type of business you have, it is a great idea to showcase your expert team members to your clients/users to earn the trust of your users. 
 
