@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: ADL Team
-Plugin URI: https://aazztech.com/product/team-pro/
+Plugin URI: https://wpwax.com/product/team-pro/
 Description: A beautiful plugin that helps you display team members on your website very easily and you can also show details of your each team member on a separate member page with this plugin. You can see the <a href="https://aazztech.com/demos/plugins/adl-team-demo-1/m" target="_blank"> LIVE DEMO here</a>.
-Version: 1.2.5
-Author: ADL Plugins
-Author URI: https://aazztech.com
+Version: 1.2.6
+Author: wpWax
+Author URI: https://wpwax.com
 License: GPLv2 or later
 Text Domain: adl-team
 */

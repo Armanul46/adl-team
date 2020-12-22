@@ -2,8 +2,8 @@
 Contributors: AazzTech
 Tags: team, meet the team, team showcase, team profile, teams, team slider
 Requires at least: 4.0
-Tested up to:  5.5
-Stable tag: 1.2.5
+Tested up to:  5.6
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,7 +58,7 @@ So, why do you want to use this plugin? And what makes this plugin better than o
 *   Translation ready.
 *   And many more features.
 
-Even more features are available in [__Pro version__](http://aazztech.com/plugin/adl-team-pro/).
+Even more features are available in [__Pro version__](http://wpwax.com/plugin/adl-team-pro/).
 
 = All features of the free version and including the following =
 *   6 different themes
@@ -103,6 +103,8 @@ This is how easy to use this plugin.
 2. Front view 2 (Theme - Colorful Grid)
 
 == Changelog ==
+= 1.2.6 =
+* Add: WordPress 5.6 compatibility
 = 1.2.5 =
 * Add: WordPress 5.5 compatibility
 = 1.2.4 =
