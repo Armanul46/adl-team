@@ -1,5 +1,5 @@
 ﻿=== Team ===
-Contributors: wpWax
+Contributors: wpwax
 Tags: team, meet the team, team showcase, team profile, teams, team slider
 Requires at least: 4.0
 Tested up to:  5.6
