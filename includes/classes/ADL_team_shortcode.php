@@ -74,14 +74,18 @@ class ADL_team_shortcode {
             $args = array_merge($common_args, $books_by_id);
         }
         $members = new WP_Query($args);
+        $users   = get_users( array( 'fields' => 'ID' ) );
+
         //we need loop, paged and nav_text for pagination, nav_text is available on helper class, so add paged var to gen setting.
         $general_setting['paged'] = $paged;
         $data = array(
             'loop'          => $members,
-            'general_info'                => $general_setting,
+            'general_info'  => $general_setting,
+            'users'         => $users,
+            'auto_add_members' => ! empty( $auto_add_members ) ? $auto_add_members : ''
         );
 
-        if ( $members->have_posts() ) {
+        if ( ( empty( $auto_add_members) && $members->have_posts() ) || ! empty( $auto_add_members ) && ! empty( $users ) ) {
             $ADL_team->loadView('themes/'.$general_setting['theme_name'].'/index', $data);
             wp_reset_postdata();
         }

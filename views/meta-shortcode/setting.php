@@ -115,9 +115,30 @@ global $post;
                                     </label>
                                 </li>
                             </ul>
-                            <p class="cmb2-metabox-description"><?php esc_html_e('You can Enable Image upscaling if your image size is smaller than the cropping size and it does not show up after enabling image cropping feature. ', ADL_TEAM_TEXTDOMAIN); ?></p>
                         </div>
                     </div>
+
+                    <!-- Auto add members ????-->
+                    <div class="cmb-row cmb-type-radio">
+                        <div class="cmb-th">
+                            <label for="auto_add_members"><?php esc_html_e('Auto Add Members', ADL_TEAM_TEXTDOMAIN); ?></label>
+                        </div>
+                        <div class="cmb-td">
+                            <ul class="cmb2-radio-list cmb2-list">
+                                <li>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="gs[auto_add_members]" id="auto_add_members"  value="yes" <?= (@$auto_add_members == 'yes') ? 'checked' : '';  ?> class="checkbox__input" />
+                                        <div class="checkbox__switch" id="crop_switch"></div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Member role -->
+                    <?php
+                    $member_role = ! empty( $member_role ) ? $member_role : '';
+                    $ADL_team->loadView('meta-shortcode/partials/member-role', array( 'member_role' => $member_role,));
+                    ?>
                 </div> <!-- end cmb2-metabox -->
             </div> <!-- end cmb2-wrap -->
         </div> <!-- end team-tab-1 -->

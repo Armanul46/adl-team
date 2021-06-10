@@ -1,12 +1,25 @@
 <?php
     (array_key_exists('member_info', $args) && !empty($args['member_info'])) ? extract($args['member_info']) : array();
+    
+    // user info 
+    if( ! empty( $auto_add_members ) ) {
+        $member_img_src       = get_avatar_url( $user_id );
+        $name                 = $user_data->data->display_name;
+        $designation          = $user_data->roles[0];
+        $member_email         = $user_data->data->user_email;
+        $website              = $user_data->data->user_url;
+        $memberfullbio        = get_the_author_meta( 'user_description', $user_id );
+    }
+
     if ( function_exists('aq_resize') && ('yes' === $crop_image)) {
         $upscale = (!empty($image_upscale) && 'yes' == $image_upscale) ? true : false;
-        $member_img_src = aq_resize($member_img_src, $image_width, $image_height, true, true, $upscale);
-
+        $member_img_src = empty( $auto_add_members ) ? aq_resize($member_img_src, $image_width, $image_height, true, true, $upscale) : $member_img_src;
     }
     $id = rand();
     $featherlight = (!empty($popup_show) && 'yes' == $popup_show) ? 'featherlight' : '';
+    
+    if( ! empty( $auto_add_members ) && ! empty( $member_role )  )
+   // continue;
 
 ?>
 <div class="adl-grid-md-3 grid-sm-6">
@@ -14,7 +27,7 @@
         <div class="tm-img adl-skill">
             <?php
             if( 'yes' == trim(strtolower($show_member_detail))) { ?>
-            <a href='<?= $permalink; ?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'> <img src='<?= $member_img_src;?>' alt='<?= $name;?>'></a>
+            <a href='<?= ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'> <img src='<?= $member_img_src;?>' alt='<?= $name;?>'></a>
 
             <?php
             } else{ ?>
@@ -35,7 +48,7 @@
         <div class="tm-desc-1 adl-skill">
             <?php
             if( 'yes' == trim(strtolower($show_member_detail))) { ?>
-                <h4><a href="<?php echo $permalink;?>" data-<?php echo $featherlight;?>="#f<?php echo $id; ?>"><?php echo $name; ?></a></h4>
+                <h4><a href="<?php echo ! empty( $permalink ) ? $permalink : '';?>" data-<?php echo $featherlight;?>="#f<?php echo $id; ?>"><?php echo $name; ?></a></h4>
                 <?php
             } else { ?>
                 <h4> <?php echo $name;?></h4>

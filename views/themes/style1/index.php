@@ -2,7 +2,7 @@
 // get the adl-post object and other values from the $args var
 $loop = (array_key_exists('loop', $args) && !empty($args['loop'])) ? $args['loop'] : array();
 (array_key_exists('general_info', $args) && !empty($args['general_info'])) ? extract($args['general_info']) : array();
-$chuck_four = array_chunk($loop->posts, 4);// at first chunk,  it will have 1 dummy item and 3 members. and the rest chunks will have 4 members.
+$chuck_four = ! empty( $args['auto_add_members'] ) ? array_chunk($args['users'], 4) : array_chunk($loop->posts, 4);// at first chunk,  it will have 1 dummy item and 3 members. and the rest chunks will have 4 members.
 $themeID = 'ID-'.rand(1, 9999);
 // add some items to the style array to pass to the style.php
 $st1['themeID'] = $themeID;
@@ -12,6 +12,7 @@ $data = array(
     'fs'  => $fs,
 );
 
+
 ?>
 <!--Theme: Elegant Square Grid-->
 <?php
@@ -19,7 +20,6 @@ $data = array(
 ?>
 <div class="atp-container" id="<?= $themeID; ?>">
 <?php
-
     //First Loop Starts
     foreach ( $chuck_four as $key=> $four_members ) {
         echo '<div class="adl-row">';
@@ -32,9 +32,13 @@ $data = array(
                 $member_info['popup_show'] = !empty($popup_show) ? $popup_show: '';
                 $member_info['image_width'] = !empty($st1['image_width']) ? $st1['image_width']: '270';
                 $member_info['image_height'] = !empty($st1['image_height']) ? $st1['image_height']: '260';
-
-                $ADL_team->loadTheme( 'style1/partials/member', [ 'member_info' => $member_info ] );
-
+                $member_info['user_id']     = ! empty( $auto_add_members ) ? $member : '';
+                $member_info['user_data']     = ! empty( $auto_add_members ) ? get_userdata( $member ) : '';
+                $member_info['auto_add_members']     = ! empty( $auto_add_members ) ? $auto_add_members : '';
+                $member_info['member_role']     = ( ! empty( $auto_add_members ) && ! empty( $member_role ) ) ? $member_role : '';
+                if(  empty( $auto_add_members ) || ( ! empty( $auto_add_members ) && empty( $member_role ) ) || ( ! empty( $auto_add_members ) && ! empty( $member_role ) && 'all' == $member_role )  || ( ! empty( $auto_add_members ) && ! empty( $member_role ) && $member_info['user_data']->roles[0] == $member_role ) ) {
+                    $ADL_team->loadTheme( 'style1/partials/member', [ 'member_info' => $member_info ] );
+                }
 
             } // Ends Second Loop
 
