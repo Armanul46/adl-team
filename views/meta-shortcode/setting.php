@@ -14,6 +14,7 @@ global $post;
     <ul class="team-tabs-menu">
         <li class="current" ><a href="#team-tab-1"><?php esc_html_e('General Settings', ADL_TEAM_TEXTDOMAIN); ?></a></li>
         <li><a href="#team-tab-2"><?php esc_html_e('Style Settings', ADL_TEAM_TEXTDOMAIN); ?></a></li>
+        <li><a href="#team-tab-3"><?php esc_html_e('Integration', ADL_TEAM_TEXTDOMAIN); ?></a></li>
     </ul>
     <!--TABS Container-->
     <div class="team-tab">
@@ -166,6 +167,30 @@ global $post;
             </div> <!-- end cmb2-wrap -->
         </div> <!-- end team-tab-2 -->
 
+        <!-- TABS 1 Package Data-->
+        <div id="team-tab-3" class="team-tab-content">
+            <div class="cmb2-wrap form-table">
+                <div id="cmb2-metabox" class="cmb2-metabox cmb-field-list">
+
+                    <!--Link member to detail page ????-->
+                    <div class="cmb-row cmb-type-radio">
+                        <div class="cmb-th">
+                            <label for="directorist_integration"><?php esc_html_e('Directorist', ADL_TEAM_TEXTDOMAIN); ?></label>
+                        </div>
+                        <div class="cmb-td">
+                            <ul class="cmb2-radio-list cmb2-list">
+                                <li><label class="checkbox">
+                                        <input type="checkbox" name="gs[directorist_integration]" id="directorist_integration"  value="yes" <?= ( ! empty( $directorist_integration ) && $directorist_integration == 'yes' ) ? 'checked' : '';  ?> class="checkbox__input" />
+                                        <div class="checkbox__switch"></div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                </div> <!-- end cmb2-metabox -->
+            </div> <!-- end cmb2-wrap -->
+        </div> <!-- end team-tab-1 -->
 
         <!-- TAB 3 SUPPORT-->
 
