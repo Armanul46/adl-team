@@ -1,8 +1,55 @@
 <?php
     (array_key_exists('member_info', $args) && !empty($args['member_info'])) ? extract($args['member_info']) : array();
+
+    // user info 
+    if( ! empty( $auto_add_members ) ) {
+        $member_img_src       = get_avatar_url( $user_id );
+        $name                 = $user_data->data->display_name;
+        $designation          = $user_data->roles[0];
+        $member_email         = $user_data->data->user_email;
+        $website              = $user_data->data->user_url;
+        $memberfullbio        = get_the_author_meta( 'user_description', $user_id );
+        $membershortbio       = get_the_author_meta( 'user_description', $user_id );
+        $office_telephone     = get_user_meta( $user_id, 'atbdp_phone', true );
+        if(  ! empty( $directorist_integration ) ) {
+            $atbdp_facebook       = get_user_meta( $user_id, 'atbdp_facebook', true);
+            $atbdp_twitter        = get_user_meta( $user_id, 'atbdp_twitter', true );
+            $atbdp_linkedin       = get_user_meta( $user_id, 'atbdp_linkedin', true );
+            $atbdp_youtube        = get_user_meta( $user_id, 'atbdp_youtube', true );
+            $pro_pic              = get_user_meta( $user_id, 'pro_pic', true );
+            $u_pro_pic            = ! empty( $pro_pic ) ? wp_get_attachment_image_src( $pro_pic, 'thumbnail' ) : '';
+            $member_img_src       = ! empty( $u_pro_pic ) ? $u_pro_pic[0] : $member_img_src;
+            $socials = array();
+            if( ! empty( $atbdp_facebook ) ) {
+                $socials[0] = array( 
+                    'url' => $atbdp_facebook,
+                    'id'  => 'facebook'
+                );
+            }
+            if( ! empty( $atbdp_twitter ) ) {
+                $socials[1] = array(
+                    'url' => $atbdp_twitter,
+                    'id'  => 'twitter'
+                );
+            }
+            if( ! empty( $atbdp_linkedin ) ) {
+                $socials[2] = array(
+                    'url' => $atbdp_linkedin,
+                    'id'  => 'linkedin'
+                );
+            }
+            if( ! empty( $atbdp_youtube ) ) {
+                $socials[3] = array(
+                    'url' => $atbdp_youtube,
+                    'id'  => 'youtube'
+                );
+            }
+        }
+    }
+
     if ( function_exists('aq_resize') && ('yes' === $crop_image)) {
         $upscale = (!empty($image_upscale) && 'yes' == $image_upscale) ? true : false;
-        $member_img_src = aq_resize($member_img_src, $image_width, $image_height, true, true, $upscale);
+        $member_img_src = empty( $auto_add_members ) ? aq_resize($member_img_src, $image_width, $image_height, true, true, $upscale) : $member_img_src;
 
     }
     $shortbio = wp_trim_words($membershortbio,15);
@@ -14,7 +61,7 @@
         <div class="tm-img adl-skill">
             <?php
             if( 'yes' == trim(strtolower($show_member_detail))) { ?>
-                <a href='<?= $permalink; ?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'> <img src='<?= $member_img_src;?>' alt='<?= $name;?>'></a>
+                <a href='<?= ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'> <img src='<?= $member_img_src;?>' alt='<?= $name;?>'></a>
 
                 <?php
             } else{ ?>
@@ -24,8 +71,8 @@
         </div>
         <div class="tm-info-4 adl-skill">
         <?php if ('yes' == trim(strtolower($show_member_detail)) ) { ?>
-            <h4> <a href='<?php echo $permalink;?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'> <?php echo $name;?> </a></h4>
-            <p> <a href='<?php echo $permalink;?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'><?php echo esc_html($designation); ?></a></p>
+            <h4> <a href='<?php echo ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'> <?php echo $name;?> </a></h4>
+            <p> <a href='<?php echo ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'><?php echo esc_html($designation); ?></a></p>
             <?php
         }else{
             echo "<h4> {$name} </h4>",
@@ -37,8 +84,8 @@
         <div class="tm-overlay-4">
             <div class="tm-info-4 adl-skill">
                 <?php if ('yes' == trim(strtolower($show_member_detail)) ) { ?>
-                    <h4> <a href='<?php echo $permalink;?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'> <?php echo $name;?> </a></h4>
-                    <p> <a href='<?php echo $permalink;?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'><?php echo esc_html($designation); ?></a></p>
+                    <h4> <a href='<?php echo ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'> <?php echo $name;?> </a></h4>
+                    <p> <a href='<?php echo ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?php echo $id;?>'><?php echo esc_html($designation); ?></a></p>
                     <?php
                 }else{
                     echo "<h4> {$name} </h4>",
@@ -50,7 +97,7 @@
                 <?php
                     if('yes' == trim(strtolower($show_member_detail))) { ?>
 
-                        <p> <a href='<?php echo $permalink;?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'><?php echo wp_kses($shortbio, $ADL_team->allowed_html()); ?></a></p> <?php
+                        <p> <a href='<?php echo ! empty( $permalink ) ?  $permalink : ''; ?>' data-<?php echo $featherlight;?>='#f<?= $id;?>'><?php echo wp_kses($shortbio, $ADL_team->allowed_html()); ?></a></p> <?php
 
                 } else{
                 ?>
@@ -65,6 +112,7 @@
 
 
             </div>
+            <?php if( ! empty( $socials ) ) { ?>
             <div class="tm-social tm-social-4">
                 <ul>
                     <?php foreach($socials as $index => $social): ?>
@@ -72,6 +120,7 @@
                     <?php endforeach; ?>
                 </ul>
             </div> <!-- END tm-info-3 tm-social -->
+            <?php } ?>
         </div>
     </div> <!-- tm-wrap-4 -->
 </div> <!-- END col-md-3 adl-col-sm-6-->

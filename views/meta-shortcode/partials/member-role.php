@@ -2,7 +2,7 @@
 $member_role = (array_key_exists('member_role', $args)) ? $args['member_role'] : array();
 ?>
 
-<div id="cmb2-metabox" class="cmb2-metabox cmb-field-list">
+<div id="cmb2-metabox" class="cmb2-metabox cmb-field-list adl_select_role">
 
     <div class="cmb-row">
         <div class="cmb-th st">

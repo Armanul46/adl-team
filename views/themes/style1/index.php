@@ -36,6 +36,7 @@ $data = array(
                 $member_info['user_data']     = ! empty( $auto_add_members ) ? get_userdata( $member ) : '';
                 $member_info['auto_add_members']     = ! empty( $auto_add_members ) ? $auto_add_members : '';
                 $member_info['member_role']     = ( ! empty( $auto_add_members ) && ! empty( $member_role ) ) ? $member_role : '';
+                $member_info['directorist_integration']     = ( ! empty( $auto_add_members ) && ! empty( $directorist_integration ) ) ? $directorist_integration : '';
                 if(  empty( $auto_add_members ) || ( ! empty( $auto_add_members ) && empty( $member_role ) ) || ( ! empty( $auto_add_members ) && ! empty( $member_role ) && 'all' == $member_role )  || ( ! empty( $auto_add_members ) && ! empty( $member_role ) && $member_info['user_data']->roles[0] == $member_role ) ) {
                     $ADL_team->loadTheme( 'style1/partials/member', [ 'member_info' => $member_info ] );
                 }

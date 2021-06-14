@@ -9,6 +9,41 @@
         $member_email         = $user_data->data->user_email;
         $website              = $user_data->data->user_url;
         $memberfullbio        = get_the_author_meta( 'user_description', $user_id );
+        $office_telephone     = get_user_meta( $user_id, 'atbdp_phone', true );
+        if(  ! empty( $directorist_integration ) ) {
+            $atbdp_facebook       = get_user_meta( $user_id, 'atbdp_facebook', true);
+            $atbdp_twitter        = get_user_meta( $user_id, 'atbdp_twitter', true );
+            $atbdp_linkedin       = get_user_meta( $user_id, 'atbdp_linkedin', true );
+            $atbdp_youtube        = get_user_meta( $user_id, 'atbdp_youtube', true );
+            $pro_pic              = get_user_meta( $user_id, 'pro_pic', true );
+            $u_pro_pic            = ! empty( $pro_pic ) ? wp_get_attachment_image_src( $pro_pic, 'thumbnail' ) : '';
+            $member_img_src       = ! empty( $u_pro_pic ) ? $u_pro_pic[0] : $member_img_src;
+            $socials = array();
+            if( ! empty( $atbdp_facebook ) ) {
+                $socials[0] = array( 
+                    'url' => $atbdp_facebook,
+                    'id'  => 'facebook'
+                );
+            }
+            if( ! empty( $atbdp_twitter ) ) {
+                $socials[1] = array(
+                    'url' => $atbdp_twitter,
+                    'id'  => 'twitter'
+                );
+            }
+            if( ! empty( $atbdp_linkedin ) ) {
+                $socials[2] = array(
+                    'url' => $atbdp_linkedin,
+                    'id'  => 'linkedin'
+                );
+            }
+            if( ! empty( $atbdp_youtube ) ) {
+                $socials[3] = array(
+                    'url' => $atbdp_youtube,
+                    'id'  => 'youtube'
+                );
+            }
+        }
     }
 
     if ( function_exists('aq_resize') && ('yes' === $crop_image)) {
@@ -18,8 +53,6 @@
     $id = rand();
     $featherlight = (!empty($popup_show) && 'yes' == $popup_show) ? 'featherlight' : '';
     
-    if( ! empty( $auto_add_members ) && ! empty( $member_role )  )
-   // continue;
 
 ?>
 <div class="adl-grid-md-3 grid-sm-6">
@@ -34,10 +67,12 @@
                 <img src='<?= $member_img_src;?>' alt='<?= $name;?>'>
             <?php }
             ?>
-            <?php if(!empty($socials)) {?>
+            <?php if(!empty($socials)) {
+                ?>
             <div class="tm-social tm-social-1">
                 <ul>
-                    <?php foreach($socials as $index => $social): ?>
+                    <?php 
+                    foreach($socials as $index => $social): ?>
                         <li><a href="<?= esc_url($social['url']); ?>"><i class="<?= esc_attr("fa fa-{$social['id']}");?>"></i></a></li>
                     <?php endforeach; ?>
                 </ul>

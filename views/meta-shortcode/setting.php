@@ -14,7 +14,7 @@ global $post;
     <ul class="team-tabs-menu">
         <li class="current" ><a href="#team-tab-1"><?php esc_html_e('General Settings', ADL_TEAM_TEXTDOMAIN); ?></a></li>
         <li><a href="#team-tab-2"><?php esc_html_e('Style Settings', ADL_TEAM_TEXTDOMAIN); ?></a></li>
-        <li><a href="#team-tab-3"><?php esc_html_e('Integration', ADL_TEAM_TEXTDOMAIN); ?></a></li>
+        <li id="adl_integration_tab"><a href="#team-tab-3"><?php esc_html_e('Integration', ADL_TEAM_TEXTDOMAIN); ?></a></li>
     </ul>
     <!--TABS Container-->
     <div class="team-tab">

@@ -31,6 +31,26 @@
             }
         );
     }
+    $(document).ready(function(){
+        if($("#auto_add_members").is(":checked")){
+            $('.adl_select_role').show();
+            $('#adl_integration_tab').show();
+        }
+        else if($("#auto_add_members").is(":not(:checked)")){
+            $('.adl_select_role').hide();
+            $('#adl_integration_tab').hide();
+        }
+        $('#auto_add_members').on('click', function(){ 
+            if($("#auto_add_members").is(":checked")){
+                $('.adl_select_role').show();
+                $('#adl_integration_tab').show();
+            }
+            else if($("#auto_add_members").is(":not(:checked)")){
+                $('.adl_select_role').hide();
+                $('#adl_integration_tab').hide();
+            }
+        });
+    });
 
     // SOCIAL SECTION
     // Rearrange the IDS and Add new social field
